@@ -38,4 +38,19 @@ router.post('/login',function(req,res,next){
         }
     })
 })
+
+//保存路由
+router.post('/update',function (req,res) {
+    const userId = req.cookies.userid
+    if(!userId){
+        return res.send({code:1,msg:'请先登录'})
+    }
+    UserModel.findByIdAndUpdate({_id:userId},req.body,function (err,user) {
+        const {_id, username, type} = user
+        const data = Object.assign(req.body,{_id, username, type})
+        res.send({code: 0, data})
+    })
+
+
+})
 module.exports = router;
