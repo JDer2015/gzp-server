@@ -17,11 +17,20 @@ const userSchema = new Schema({
     }
 )
 const UserModel = mongoose.model('users',userSchema)
-// UserModel.create({username:'yyy',password:'xxx',type:'sss'},function (err,doc) {
-//     console.log('create()',err,doc)
-// })
+
+
+const chatSchema = new Schema({
+    from:{type:String,required:true},
+    to:{type:String,required:true},
+    chat_id:{type:String,required:true},
+    content:{type:String,required:true},
+    read:{type:Boolean,default:false},
+    create_time:{type:Number}
+})
+const ChatModel = mongoose.model('chats',chatSchema)
 
 exports.UserModel = UserModel
+exports.ChatModel = ChatModel
 
 // 使用mongoose操作mongodb的测试文件
 // 1. 连接数据库
